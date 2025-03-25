@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Shop Dropshipping Tutorial</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #FE2C55 0%, #25F4EE 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        .tutorial-container {
+            display: flex;
+            margin-top: 40px;
+            min-height: 500px;
+        }
+        
+        .steps {
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-right: 30px;
+        }
+        
+        .step {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step:hover {
+            background-color: #f0f8ff;
+        }
+        
+        .step.active {
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+            color: white;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(37, 244, 238, 0.3);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .step.active .step-number {
+            background-color: white;
+            color: #FE2C55;
+        }
+        
+        .content-area {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        .step-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .step-description {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .visualization {
+            height: 300px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #threejs-container {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .phone-mockup {
+            position: absolute;
+            width: 200px;
+            height: 400px;
+            border: 10px solid #333;
+            border-radius: 30px;
+            background-color: #111;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .app-screen {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.5s ease;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            font-size: 0.8rem;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .highlight {
+            position: absolute;
+            background-color: rgba(255, 255, 0, 0.3);
+            border: 2px dashed yellow;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .tutorial-container {
+                flex-direction: column;
+            }
+            
+            .steps {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>TikTok Shop Dropshipping Guide</h1>
+            <div class="subtitle">Step-by-Step Tutorial to Start Your Business</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tutorial-container">
+            <div class="steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-title">Create TikTok Shop Account</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-title">Open TTS Dropship App</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-title">Link TikTok Shop Store</span>
+                </div>
+                <div class="step" data-step="4">
+                    <span class="step-number">4</span>
+                    <span class="step-title">Select Supplier</span>
+                </div>
+                <div class="step" data-step="5">
+                    <span class="step-number">5</span>
+                    <span class="step-title">Product Listing</span>
+                </div>
+                <div class="step" data-step="6">
+                    <span class="step-number">6</span>
+                    <span class="step-title">Order & Payment Process</span>
+                </div>
+                <div class="step" data-step="7">
+                    <span class="step-number">7</span>
+                    <span class="step-title">Receive Profit</span>
+                </div>
+            </div>
+            
+            <div class="content-area">
+                <div class="step-content active" data-content="1">
+                    <h2 class="step-title">Step 1: Create TikTok Shop Account</h2>
+                    <p class="step-description">
+                        To start dropshipping on TikTok Shop, you first need to create a seller account. 
+                        Visit the TikTok Shop website or download the TikTok Seller app from your app store. 
+                        Follow the registration process, providing all required business information and documents.
+                    </p>
+                    <div class="visualization">
+                        <div id="threejs-container"></div>
+                        <div class="phone-mockup" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=TikTok+Shop+Sign+Up');"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-content" data-content="2">
+                    <h2 class="step-title">Step 2: Open TTS Dropship App</h2>
+                    <p class="step-description">
+                        Download and install the TTS Dropship app from your app store. 
+                        Once installed, open the app and navigate to the "Account" section. 
+                        This is your control center for managing your dropshipping business.
+                    </p>
+                    <div class="visualization">
+                        <div class="phone-mockup" style="left: 30%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=App+Store+Download');"></div>
+                            </div>
+                        </div>
+                        <div class="phone-mockup" style="left: 70%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=TTS+Dropship+App');"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-content" data-content="3">
+                    <h2 class="step-title">Step 3: Link TikTok Shop Store</h2>
+                    <p class="step-description">
+                        In the TTS Dropship app, go to "Sell on TikTok Shop" and select "Add TikTok Shop Store". 
+                        You'll need to authorize the connection between your TikTok Shop account and the dropshipping app. 
+                        This allows you to manage products and orders seamlessly.
+                    </p>
+                    <div class="visualization">
+                        <div class="phone-mockup" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=Account+Settings');"></div>
+                                <div class="highlight" style="width: 150px; height: 40px; top: 100px; left: 20px;"></div>
+                                <div class="floating-element" style="top: 150px; left: 200px;">Click here to connect your store</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-content" data-content="4">
+                    <h2 class="step-title">Step 4: Select Supplier</h2>
+                    <p class="step-description">
+                        Choose a reliable supplier to link with your store. The TTS Dropship app provides a list of verified suppliers. 
+                        Review their product offerings, shipping times, and ratings before making your selection. 
+                        You can link with multiple suppliers to diversify your product catalog.
+                    </p>
+                    <div class="visualization">
+                        <div class="phone-mockup" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=Supplier+List');"></div>
+                                <div class="highlight" style="width: 160px; height: 120px; top: 80px; left: 15px;"></div>
+                                <div class="floating-element" style="top: 220px; left: 200px;">Check ratings and reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-content" data-content="5">
+                    <h2 class="step-title">Step 5: Product Listing</h2>
+                    <p class="step-description">
+                        Navigate to the product list from your supplier. Select products you want to sell and click "List Product". 
+                        Customize the product title, description, and price for your store. 
+                        The app will automatically sync inventory and handle order processing.
+                    </p>
+                    <div class="visualization">
+                        <div class="phone-mockup" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=Product+Catalog');"></div>
+                                <div class="highlight" style="width: 160px; height: 80px; top: 120px; left: 15px;"></div>
+                                <div class="floating-element" style="top: 220px; left: 200px;">Set your profit margin here</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-content" data-content="6">
+                    <h2 class="step-title">Step 6: Order & Payment Process</h2>
+                    <p class="step-description">
+                        When a customer places an order on your TikTok Shop, you'll receive notification. 
+                        The supplier will ship directly to your customer. You only need to pay the supplier 
+                        after receiving payment from TikTok Shop (typically after order fulfillment).
+                    </p>
+                    <div class="visualization">
+                        <div class="phone-mockup" style="left: 30%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=New+Order');"></div>
+                            </div>
+                        </div>
+                        <div class="phone-mockup" style="left: 70%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=Payment+Process');"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-content" data-content="7">
+                    <h2 class="step-title">Step 7: Receive Profit</h2>
+                    <p class="step-description">
+                        Your profit is the difference between the price you set on TikTok Shop and the supplier's price. 
+                        After deducting any platform fees, your earnings will be deposited to your account. 
+                        Monitor your sales analytics in the app to optimize your product selection and pricing strategy.
+                    </p>
+                    <div class="visualization">
+                        <div class="phone-mockup" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                            <div class="phone-screen">
+                                <div class="app-screen" style="background-image: url('https://via.placeholder.com/180x360?text=Earnings+Dashboard');"></div>
+                                <div class="highlight" style="width: 140px; height: 60px; top: 200px; left: 25px;"></div>
+                                <div class="floating-element" style="top: 100px; left: 200px;">Your profit appears here</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="nav-button" id="prev-btn" disabled>Previous</button>
+                    <button class="nav-button" id="next-btn">Next</button>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress" id="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Step navigation
+            const steps = document.querySelectorAll('.step');
+            const stepContents = document.querySelectorAll('.step-content');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            
+            let currentStep = 1;
+            const totalSteps = steps.length;
+            
+            // Initialize Three.js scene for the first step
+            initThreeJS();
+            
+            // Update progress bar
+            function updateProgress() {
+                const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Update navigation buttons
+            function updateButtons() {
+                prevBtn.disabled = currentStep === 1;
+                nextBtn.textContent = currentStep === totalSteps ? 'Finish' : 'Next';
+            }
+            
+            // Show current step
+            function showStep(stepNumber) {
+                // Hide all steps
+                steps.forEach(step => step.classList.remove('active'));
+                stepContents.forEach(content => content.classList.remove('active'));
+                
+                // Show current step
+                document.querySelector(`.step[data-step="${stepNumber}"]`).classList.add('active');
+                document.querySelector(`.step-content[data-content="${stepNumber}"]`).classList.add('active');
+                
+                // Update animations based on step
+                updateAnimations(stepNumber);
+                
+                // Update buttons and progress
+                updateButtons();
+                updateProgress();
+            }
+            
+            // Step-specific animations
+            function updateAnimations(stepNumber) {
+                // Reset all animations
+                const floatingElements = document.querySelectorAll('.floating-element');
+                const highlights = document.querySelectorAll('.highlight');
+                
+                floatingElements.forEach(el => el.style.opacity = '0');
+                highlights.forEach(el => el.style.opacity = '0');
+                
+                // Step-specific animations
+                setTimeout(() => {
+                    switch(stepNumber) {
+                        case 1:
+                            animatePhoneMovement();
+                            break;
+                        case 2:
+                            animateTwoPhones();
+                            break;
+                        case 3:
+                            animateHighlightAndTooltip(0);
+                            break;
+                        case 4:
+                            animateHighlightAndTooltip(0);
+                            break;
+                        case 5:
+                            animateHighlightAndTooltip(0);
+                            break;
+                        case 6:
+                            animateTwoPhones();
+                            break;
+                        case 7:
+                            animateHighlightAndTooltip(0);
+                            break;
+                    }
+                }, 500);
+            }
+            
+            // Animation functions
+            function animatePhoneMovement() {
+                const phone = document.querySelector('.phone-mockup');
+                phone.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                setTimeout(() => {
+                    phone.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 1000);
+            }
+            
+            function animateTwoPhones() {
+                const phones = document.querySelectorAll('.phone-mockup');
+                phones[0].style.transform = 'translate(-80%, -50%)';
+                phones[1].style.transform = 'translate(-20%, -50%)';
+                
+                setTimeout(() => {
+                    phones[0].style.transform = 'translate(-50%, -50%)';
+                    phones[1].style.transform = 'translate(-50%, -50%)';
+                }, 1000);
+            }
+            
+            function animateHighlightAndTooltip(index) {
+                const highlights = document.querySelectorAll('.highlight');
+                const tooltips = document.querySelectorAll('.floating-element');
+                
+                if (highlights.length > index) {
+                    highlights[index].style.opacity = '1';
+                    highlights[index].style.transform = 'scale(1.05)';
+                    
+                    setTimeout(() => {
+                        highlights[index].style.transform = 'scale(1)';
+                    }, 500);
+                }
+                
+                if (tooltips.length > index) {
+                    setTimeout(() => {
+                        tooltips[index].style.opacity = '1';
+                        tooltips[index].style.transform = 'translateX(0)';
+                    }, 700);
+                }
+            }
+            
+            // Event listeners
+            steps.forEach(step => {
+                step.addEventListener('click', function() {
+                    currentStep = parseInt(this.getAttribute('data-step'));
+                    showStep(currentStep);
+                });
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    // Finish tutorial action
+                    alert('Congratulations! You completed the tutorial. Happy dropshipping!');
+                }
+            });
+            
+            // Initialize Three.js for the first step
+            function initThreeJS() {
+                const container = document.getElementById('threejs-container');
+                
+                // Only initialize if container exists (for step 1)
+                if (!container) return;
+                
+                // Create scene
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xf5f5f5);
+                
+                // Create camera
+                const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                camera.position.z = 5;
+                
+                // Create renderer
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                container.appendChild(renderer.domElement);
+                
+                // Add lights
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(1, 1, 1);
+                scene.add(directionalLight);
+                
+                // Create TikTok logo
+                createTikTokLogo(scene);
+                
+                // Animation loop
+                function animate() {
+                    requestAnimationFrame(animate);
+                    renderer.render(scene, camera);
+                }
+                
+                animate();
+                
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                });
+            }
+            
+            function createTikTokLogo(scene) {
+                // Create the TikTok "d" shape
+                const dShape = new THREE.Group();
+                
+                // Create the main curve
+                const curve = new THREE.EllipseCurve(
+                    0, 0,            // ax, aY
+                    1.5, 1.5,         // xRadius, yRadius
+                    0, Math.PI * 1.5, // aStartAngle, aEndAngle
+                    false,            // aClockwise
+                    0                 // aRotation
+                );
+                
+                const points = curve.getPoints(50);
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                
+                // Create the line
+                const material = new THREE.LineBasicMaterial({ color: 0xFE2C55 });
+                const curveObject = new THREE.Line(geometry, material);
+                dShape.add(curveObject);
+                
+                // Create the straight line
+                const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3(0, 0, 0),
+                    new THREE.Vector3(0, -1.5, 0)
+                ]);
+                const lineMaterial = new THREE.LineBasicMaterial({ color: 0x25F4EE });
+                const line = new THREE.Line(lineGeometry, lineMaterial);
+                dShape.add(line);
+                
+                // Position and add to scene
+                dShape.position.x = -0.5;
+                scene.add(dShape);
+                
+                // Add animation
+                let time = 0;
+                function animateLogo() {
+                    time += 0.01;
+                    dShape.rotation.z = Math.sin(time) * 0.1;
+                    requestAnimationFrame(animateLogo);
+                }
+                animateLogo();
+            }
+            
+            // Initialize first step
+            showStep(1);
+        });
+    </script>
+</body>
+</html>
