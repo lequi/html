@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Revision Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .quiz-section {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .clock {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #000;
+            position: relative;
+            margin: 20px auto;
+        }
+        .clock-center {
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 71px;
+            left: 71px;
+        }
+        .hour-hand {
+            width: 4px;
+            height: 40px;
+            background: #000;
+            position: absolute;
+            top: 35px;
+            left: 73px;
+            transform-origin: bottom center;
+        }
+        .minute-hand {
+            width: 2px;
+            height: 60px;
+            background: #000;
+            position: absolute;
+            top: 15px;
+            left: 74px;
+            transform-origin: bottom center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .shape-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .shape {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            position: relative;
+        }
+        .shape-original {
+            background-color: #f0f0f0;
+        }
+        .shape-rotated {
+            background-color: #e0e0e0;
+        }
+        .shape-part {
+            position: absolute;
+            background-color: #555;
+        }
+        .fact-family {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .fact-family input {
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Maths Revision Quiz</h1>
+    
+    <div class="quiz-section" id="part1">
+        <h2>Part 1: Multiplication and Division Facts</h2>
+        
+        <div class="question">
+            <p>For each multiplication fact, circle the equivalent division fact:</p>
+            
+            <div class="question">
+                <p>1. 5 × 2 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="A"> A. 30 ÷ 5</label><br>
+                    <label><input type="radio" name="q1" value="B"> B. 8 ÷ 2</label><br>
+                    <label><input type="radio" name="q1" value="C"> C. 10 ÷ 2</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>2. 2 × 2 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="A"> A. 30 ÷ 2</label><br>
+                    <label><input type="radio" name="q2" value="B"> B. 12 ÷ 3</label><br>
+                    <label><input type="radio" name="q2" value="C"> C. 40 ÷ 5</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>3. 4 × 5 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="A"> A. 20 ÷ 5</label><br>
+                    <label><input type="radio" name="q3" value="B"> B. 30 ÷ 3</label><br>
+                    <label><input type="radio" name="q3" value="C"> C. 40 ÷ 2</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>4. 4 × 2 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="A"> A. 16 ÷ 2</label><br>
+                    <label><input type="radio" name="q4" value="B"> B. 20 ÷ 5</label><br>
+                    <label><input type="radio" name="q4" value="C"> C. 14 ÷ 2</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>5. 3 × 3 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="A"> A. 30 ÷ 10</label><br>
+                    <label><input type="radio" name="q5" value="B"> B. 6 ÷ 3</label><br>
+                    <label><input type="radio" name="q5" value="C"> C. 45 ÷ 5</label>
+                </div>
+            </div>
+            
+            <p>For each division fact, circle the equivalent multiplication fact:</p>
+            
+            <div class="question">
+                <p>1. 30 ÷ 5 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="A"> A. 2 × 3</label><br>
+                    <label><input type="radio" name="q6" value="B"> B. 4 × 5</label><br>
+                    <label><input type="radio" name="q6" value="C"> C. 4 × 2</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>2. 16 ÷ 2 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="A"> A. 6 × 2</label><br>
+                    <label><input type="radio" name="q7" value="B"> B. 2 × 4</label><br>
+                    <label><input type="radio" name="q7" value="C"> C. 5 × 5</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>3. 18 ÷ 2 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="A"> A. 2 × 2</label><br>
+                    <label><input type="radio" name="q8" value="B"> B. 3 × 3</label><br>
+                    <label><input type="radio" name="q8" value="C"> C. 4 × 4</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>4. 50 ÷ 5 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="A"> A. 2 × 5</label><br>
+                    <label><input type="radio" name="q9" value="B"> B. 7 × 2</label><br>
+                    <label><input type="radio" name="q9" value="C"> C. 5 × 3</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>5. 30 ÷ 5 =</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="A"> A. 3 × 5</label><br>
+                    <label><input type="radio" name="q10" value="B"> B. 3 × 2</label><br>
+                    <label><input type="radio" name="q10" value="C"> C. 6 × 5</label>
+                </div>
+            </div>
+            
+            <button onclick="checkPart1()">Check Answers</button>
+            <div id="part1-result" class="result"></div>
+        </div>
+    </div>
+    
+    <div class="quiz-section" id="part2">
+        <h2>Part 2: Equivalent Fractions</h2>
+        
+        <div class="question">
+            <p>Circle the equivalent fraction statement for each division fact:</p>
+            
+            <div class="question">
+                <p>1. 16 ÷ 4 = — of ______.</p>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="A"> A. ¼ of 16</label><br>
+                    <label><input type="radio" name="q11" value="B"> B. ¹⁄₁₆ of 4</label><br>
+                    <label><input type="radio" name="q11" value="C"> C. ½ of 12</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>2. 60 ÷ 2 = — of ______.</p>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="A"> A. ⅓ of 2</label><br>
+                    <label><input type="radio" name="q12" value="B"> B. ½ of 60</label><br>
+                    <label><input type="radio" name="q12" value="C"> C. ¹⁄₆₀ of 2</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>3. 18 ÷ 2 = — of ______.</p>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="A"> A. ½ of 16</label><br>
+                    <label><input type="radio" name="q13" value="B"> B. ⅕ of 18</label><br>
+                    <label><input type="radio" name="q13" value="C"> C. ½ of 18</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>4. 24 ÷ 4 = — of ______.</p>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="A"> A. ¼ of 24</label><br>
+                    <label><input type="radio" name="q14" value="B"> B. ¹⁄₂₄ of 4</label><br>
+                    <label><input type="radio" name="q14" value="C"> C. ½ of 24</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>5. 20 ÷ 2 = — of ______.</p>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="A"> A. ½ of 20</label><br>
+                    <label><input type="radio" name="q15" value="B"> B. ¹⁄₂₀ of 10</label><br>
+                    <label><input type="radio" name="q15" value="C"> C. ¼ of 20</label>
+                </div>
+            </div>
+            
+            <button onclick="checkPart2()">Check Answers</button>
+            <div id="part2-result" class="result"></div>
+        </div>
+    </div>
+    
+    <div class="quiz-section" id="part3">
+        <h2>Part 3: Rotations</h2>
+        
+        <div class="question">
+            <p>Circle the correct answer:</p>
+            
+            <div class="question">
+                <p>1. Start at the arrow. Which dot will the arrow point to if it was moved a quarter turn clockwise?</p>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="A"> A. Dot A</label><br>
+                    <label><input type="radio" name="q16" value="B"> B. Dot B</label><br>
+                    <label><input type="radio" name="q16" value="C"> C. Dot C</label>
+                </div>
+                <p>(Imagine a clock face with arrow at 12, dots at 3, 6, and 9)</p>
+            </div>
+            
+            <div class="question">
+                <p>2. Start at the arrow. Which dot will the arrow point to if it was moved a half turn clockwise?</p>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="A"> A. Dot A</label><br>
+                    <label><input type="radio" name="q17" value="B"> B. Dot B</label><br>
+                    <label><input type="radio" name="q17" value="C"> C. Dot C</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>3. Start at the arrow. Which dot will the arrow point to if it was moved a half turn anticlockwise?</p>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="A"> A. Dot A</label><br>
+                    <label><input type="radio" name="q18" value="B"> B. Dot B</label><br>
+                    <label><input type="radio" name="q18" value="C"> C. Dot C</label>
+                </div>
+            </div>
+            
+            <button onclick="checkPart3()">Check Answers</button>
+            <div id="part3-result" class="result"></div>
+        </div>
+    </div>
+    
+    <div class="quiz-section" id="part4">
+        <h2>Part 4: Shape Rotation</h2>
+        
+        <div class="question">
+            <p>Visualize rotating these shapes and select the correct rotated version:</p>
+            
+            <div class="question">
+                <p>1. Turn the shape clockwise a quarter turn:</p>
+                <div class="shape-container">
+                    <div class="shape shape-original" id="shape1-original">
+                        <div class="shape-part" style="width: 60px; height: 20px; top: 20px; left: 20px;"></div>
+                    </div>
+                    <div>→</div>
+                    <div class="options">
+                        <label><input type="radio" name="q19" value="A"> A. <div class="shape" style="display: inline-block; vertical-align: middle;">
+                            <div class="shape-part" style="width: 20px; height: 60px; top: 20px; left: 40px;"></div>
+                        </div></label><br>
+                        <label><input type="radio" name="q19" value="B"> B. <div class="shape" style="display: inline-block; vertical-align: middle;">
+                            <div class="shape-part" style="width: 60px; height: 20px; top: 40px; left: 20px;"></div>
+                        </div></label><br>
+                        <label><input type="radio" name="q19" value="C"> C. <div class="shape" style="display: inline-block; vertical-align: middle;">
+                            <div class="shape-part" style="width: 20px; height: 60px; top: 20px; left: 20px;"></div>
+                        </div></label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>2. Turn the shape anticlockwise a half turn:</p>
+                <div class="shape-container">
+                    <div class="shape shape-original" id="shape2-original">
+                        <div class="shape-part" style="width: 60px; height: 20px; top: 40px; left: 20px;"></div>
+                    </div>
+                    <div>→</div>
+                    <div class="options">
+                        <label><input type="radio" name="q20" value="A"> A. <div class="shape" style="display: inline-block; vertical-align: middle;">
+                            <div class="shape-part" style="width: 60px; height: 20px; top: 20px; left: 20px;"></div>
+                        </div></label><br>
+                        <label><input type="radio" name="q20" value="B"> B. <div class="shape" style="display: inline-block; vertical-align: middle;">
+                            <div class="shape-part" style="width: 20px; height: 60px; top: 20px; left: 40px;"></div>
+                        </div></label><br>
+                        <label><input type="radio" name="q20" value="C"> C. <div class="shape" style="display: inline-block; vertical-align: middle;">
+                            <div class="shape-part" style="width: 60px; height: 20px; top: 40px; left: 20px;"></div>
+                        </div></label>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="checkPart4()">Check Answers</button>
+            <div id="part4-result" class="result"></div>
+        </div>
+    </div>
+    
+    <div class="quiz-section" id="part5">
+        <h2>Part 5: Fact Families</h2>
+        
+        <div class="question">
+            <p>Use the three numbers to complete the fact family house:</p>
+            
+            <div class="question">
+                <p>Numbers: 24, 13, 37</p>
+                <div class="fact-family">
+                    <div><input type="text" id="f1-1"> + <input type="text" id="f1-2"> = <input type="text" id="f1-3"></div>
+                    <div><input type="text" id="f1-4"> = <input type="text" id="f1-5"> + <input type="text" id="f1-6"></div>
+                    <div><input type="text" id="f1-7"> + <input type="text" id="f1-8"> = <input type="text" id="f1-9"></div>
+                    <div><input type="text" id="f1-10"> = <input type="text" id="f1-11"> + <input type="text" id="f1-12"></div>
+                    <div><input type="text" id="f1-13"> - <input type="text" id="f1-14"> = <input type="text" id="f1-15"></div>
+                    <div><input type="text" id="f1-16"> = <input type="text" id="f1-17"> - <input type="text" id="f1-18"></div>
+                    <div><input type="text" id="f1-19"> - <input type="text" id="f1-20"> = <input type="text" id="f1-21"></div>
+                    <div><input type="text" id="f1-22"> = <input type="text" id="f1-23"> - <input type="text" id="f1-24"></div>
+                </div>
+            </div>
+            
+            <button onclick="checkPart5()">Check Answers</button>
+            <div id="part5-result" class="result"></div>
+        </div>
+    </div>
+    
+    <div class="quiz-section" id="part6">
+        <h2>Part 6: Telling Time</h2>
+        
+        <div class="question">
+            <p>Set the clocks to show the correct time:</p>
+            
+            <div class="question">
+                <p>1. 20 minutes past 10</p>
+                <div class="clock" id="clock1">
+                    <div class="clock-center"></div>
+                    <div class="hour-hand" id="hour-hand1"></div>
+                    <div class="minute-hand" id="minute-hand1"></div>
+                </div>
+                <div>
+                    <label>Hour: <input type="number" id="hour1" min="1" max="12" value="10"></label>
+                    <label>Minute: <input type="number" id="minute1" min="0" max="59" value="20"></label>
+                    <button onclick="updateClock('clock1', 'hour1', 'minute1')">Update Clock</button>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>2. 5 minutes past 7</p>
+                <div class="clock" id="clock2">
+                    <div class="clock-center"></div>
+                    <div class="hour-hand" id="hour-hand2"></div>
+                    <div class="minute-hand" id="minute-hand2"></div>
+                </div>
+                <div>
+                    <label>Hour: <input type="number" id="hour2" min="1" max="12" value="7"></label>
+                    <label>Minute: <input type="number" id="minute2" min="0" max="59" value="5"></label>
+                    <button onclick="updateClock('clock2', 'hour2', 'minute2')">Update Clock</button>
+                </div>
+            </div>
+            
+            <button onclick="checkPart6()">Check Answers</button>
+            <div id="part6-result" class="result"></div>
+        </div>
+    </div>
+    
+    <button onclick="checkAll()" style="background-color: #2196F3; margin-top: 20px;">Check All Answers</button>
+    <div id="final-result" class="result" style="font-size: 1.2em; margin-top: 20px;"></div>
+
+    <script>
+        // Correct answers
+        const answers = {
+            part1: {
+                q1: "C", q2: "B", q3: "A", q4: "A", q5: "A",
+                q6: "A", q7: "B", q8: "B", q9: "A", q10: "A"
+            },
+            part2: {
+                q11: "A", q12: "B", q13: "C", q14: "A", q15: "A"
+            },
+            part3: {
+                q16: "A", q17: "B", q18: "B"
+            },
+            part4: {
+                q19: "A", q20: "A"
+            },
+            part5: {
+                f1: ["13", "24", "37", "37", "13", "24", "24", "13", "37", "37", "24", "13", 
+                     "37", "24", "13", "13", "37", "24", "37", "13", "24", "24", "37", "13"]
+            },
+            part6: {
+                clock1: {hour: 10, minute: 20},
+                clock2: {hour: 7, minute: 5}
+            }
+        };
+        
+        function checkPart1() {
+            let score = 0;
+            let total = 10;
+            let result = "";
+            
+            for (let i = 1; i <= total; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === answers.part1[`q${i}`]) {
+                    score++;
+                    result += `Q${i}: Correct!<br>`;
+                } else {
+                    result += `Q${i}: Incorrect. The correct answer was ${answers.part1[`q${i}`]}.<br>`;
+                }
+            }
+            
+            document.getElementById("part1-result").innerHTML = `You scored ${score} out of ${total}.<br>${result}`;
+        }
+        
+        function checkPart2() {
+            let score = 0;
+            let total = 5;
+            let result = "";
+            
+            for (let i = 1; i <= total; i++) {
+                const qNum = i + 10;
+                const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
+                if (selected && selected.value === answers.part2[`q${qNum}`]) {
+                    score++;
+                    result += `Q${i}: Correct!<br>`;
+                } else {
+                    result += `Q${i}: Incorrect. The correct answer was ${answers.part2[`q${qNum}`]}.<br>`;
+                }
+            }
+            
+            document.getElementById("part2-result").innerHTML = `You scored ${score} out of ${total}.<br>${result}`;
+        }
+        
+        function checkPart3() {
+            let score = 0;
+            let total = 3;
+            let result = "";
+            
+            for (let i = 1; i <= total; i++) {
+                const qNum = i + 15;
+                const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
+                if (selected && selected.value === answers.part3[`q${qNum}`]) {
+                    score++;
+                    result += `Q${i}: Correct!<br>`;
+                } else {
+                    result += `Q${i}: Incorrect. The correct answer was ${answers.part3[`q${qNum}`]}.<br>`;
+                }
+            }
+            
+            document.getElementById("part3-result").innerHTML = `You scored ${score} out of ${total}.<br>${result}`;
+        }
+        
+        function checkPart4() {
+            let score = 0;
+            let total = 2;
+            let result = "";
+            
+            for (let i = 1; i <= total; i++) {
+                const qNum = i + 18;
+                const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
+                if (selected && selected.value === answers.part4[`q${qNum}`]) {
+                    score++;
+                    result += `Q${i}: Correct!<br>`;
+                } else {
+                    result += `Q${i}: Incorrect. The correct answer was ${answers.part4[`q${qNum}`]}.<br>`;
+                }
+            }
+            
+            document.getElementById("part4-result").innerHTML = `You scored ${score} out of ${total}.<br>${result}`;
+        }
+        
+        function checkPart5() {
+            let score = 0;
+            let total = 24;
+            let result = "";
+            
+            for (let i = 1; i <= total; i++) {
+                const input = document.getElementById(`f1-${i}`);
+                if (input.value === answers.part5.f1[i-1]) {
+                    score++;
+                }
+            }
+            
+            document.getElementById("part5-result").innerHTML = `You got ${score} out of ${total} correct.`;
+        }
+        
+        function checkPart6() {
+            let score = 0;
+            let total = 2;
+            let result = "";
+            
+            // Check clock 1
+            const hour1 = parseInt(document.getElementById("hour1").value);
+            const minute1 = parseInt(document.getElementById("minute1").value);
+            if (hour1 === answers.part6.clock1.hour && minute1 === answers.part6.clock1.minute) {
+                score++;
+                result += "Clock 1: Correct!<br>";
+            } else {
+                result += `Clock 1: Incorrect. The correct time was ${answers.part6.clock1.hour}:${answers.part6.clock1.minute}.<br>`;
+            }
+            
+            // Check clock 2
+            const hour2 = parseInt(document.getElementById("hour2").value);
+            const minute2 = parseInt(document.getElementById("minute2").value);
+            if (hour2 === answers.part6.clock2.hour && minute2 === answers.part6.clock2.minute) {
+                score++;
+                result += "Clock 2: Correct!<br>";
+            } else {
+                result += `Clock 2: Incorrect. The correct time was ${answers.part6.clock2.hour}:${answers.part6.clock2.minute}.<br>`;
+            }
+            
+            document.getElementById("part6-result").innerHTML = `You scored ${score} out of ${total}.<br>${result}`;
+        }
+        
+        function updateClock(clockId, hourId, minuteId) {
+            const hour = parseInt(document.getElementById(hourId).value);
+            const minute = parseInt(document.getElementById(minuteId).value);
+            
+            const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
+            const minuteDeg = minute * 6;
+            
+            const clock = document.getElementById(clockId);
+            const hourHand = clock.querySelector(".hour-hand");
+            const minuteHand = clock.querySelector(".minute-hand");
+            
+            hourHand.style.transform = `rotate(${hourDeg}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+        }
+        
+        function checkAll() {
+            checkPart1();
+            checkPart2();
+            checkPart3();
+            checkPart4();
+            checkPart5();
+            checkPart6();
+            
+            // Initialize all clocks
+            updateClock('clock1', 'hour1', 'minute1');
+            updateClock('clock2', 'hour2', 'minute2');
+        }
+        
+        // Initialize clocks on page load
+        window.onload = function() {
+            updateClock('clock1', 'hour1', 'minute1');
+            updateClock('clock2', 'hour2', 'minute2');
+        };
+    </script>
+</body>
+</html>
